@@ -36,6 +36,12 @@
       font-weight: 900;
       flex-shrink: 0;
       padding: 0 20px;
+      text-decoration: underline;
+      text-decoration-color: #E7E7E7;
+    }
+
+    .nav-logo:hover {
+      text-decoration: underline;
     }
  
     .nav-links {
