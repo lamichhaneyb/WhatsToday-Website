@@ -31,12 +31,60 @@
     <main class="content">
       <div class="content-inner">
         <h1 class="page-title">Local News</h1>
-        <div class="placeholder">
-          <!-- Page content-->
+        <div class="localContainer">
+
+          <!-- trending -->
+          <section class="localSection">
+            <h2 class="sectionTitle clickable">🔥 Trending Near You</h2>
+            <div class="horizontalScroll" id="trendingSection">
+              <!-- dynamic cards will go here -->
+            </div>
+          </section>
+        
+          <!-- live -->
+          <section class="localSection">
+            <h2 class="sectionTitle clickable">🎥 Live Around You</h2>
+            <div class="horizontalScroll" id="liveSection">
+              <!-- videos later -->
+            </div>
+          </section>
+        
+          <!-- alerts -->
+          <section class="localSection">
+            <h2 class="sectionTitle clickable">🚨 Alerts & Updates</h2>
+            <div class="verticalFeed" id="alertsSection">
+              <!-- quick updates -->
+            </div>
+          </section>
+        
+          <!-- explore -->
+          <section class="localSection">
+            <h2 class="sectionTitle clickable">📍 Explore Nearby</h2>
+            <div class="gridLayout" id="exploreSection">
+              <!-- places/events -->
+            </div>
+          </section>
+        
+          <!-- recommended -->
+          <section class="localSection">
+            <h2 class="sectionTitle clickable">⭐ Recommended For You</h2>
+            <div class="horizontalScroll" id="recommendedSection">
+              <!-- personalized -->
+            </div>
+          </section>
+        
         </div>
       </div>
     </main>
   </div>
+
+  
+
   <script src="js/date.js"></script>
+<script src="js/local-layout.js"></script>
+<script src="js/local-ui.js"></script>
+
+
+
 </body>
 </html>
