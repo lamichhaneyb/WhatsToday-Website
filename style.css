@@ -127,14 +127,15 @@
       margin-bottom: 24px;
       text-align: center;
     }
-
+    .filter{
+    margin-right: auto;
+    }
     .filterInput {
       width: 270px;
       padding: 6px 10px;
       border: 1px solid #b4b4b4;
       background: #E1E1E1;
       font-size: 12px;
-      margin-left: -725px;
       border-radius: 10px;
     }
 
@@ -324,3 +325,94 @@
   transform: scale(1.05);
   background: #d0d0d0;
 }
+
+
+.form-Main{
+    height:100vh;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+ }
+ .form-container {
+    max-width:320px;
+    width: 100%;
+    padding: 40px;
+    box-shadow: 0 0 10px black;
+    background: transparent;
+    border-radius: 30px;
+    text-align: center;
+    backdrop-filter: blur(20px);
+    box-sizing: content-box;
+ }
+ .form-header {
+    text-align: center;
+    margin-bottom: 25px;
+    width: bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: rgb(0, 0, 0);
+ }
+ .input-container {
+    position: relative;
+    margin-bottom: 20px;
+ }
+ .input-container input {
+    padding:15px 20px ;
+    width: 275px;
+    border-radius: 30px;
+    border: 0px solid white;
+    box-shadow: 0 0 5px black;
+    margin-bottom: 20px;
+    background: transparent;
+    font-size: 1rem;
+    outline: none;
+    color: black;
+ }
+ .input-container input:hover{
+    border: 2px solid rgba(0, 0, 0, 0.304);
+ }
+ input::placeholder {
+    color: rgb(96, 90, 90);
+    font-size: 0.8rem;
+ }
+ .forgot-password {
+    text-align: right;
+    margin-bottom: 20px;
+
+ }
+ .forgot-password a {
+    text-decoration: none;
+    color: rgb(183, 162, 162);
+    font-size: 14px;
+ }
+ .forgot-password a:hover {
+    text-decoration: underline;
+ }
+ .submit {
+    width: 100%;
+    padding: 15px;
+    border-radius: 20px;
+    border: 0px solid ;
+    margin-bottom: 20px;
+    font-family: sans-serif;
+    font-weight: 900;
+    background: rgb(255, 112, 112);
+    cursor: pointer;
+ }
+ .submit:hover {
+    box-shadow: 0 0 9px rgba(255, 255, 255, 0.662);
+ }
+ .signup {
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+ }
+ .signup a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+ }
