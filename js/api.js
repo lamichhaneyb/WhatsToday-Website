@@ -37,3 +37,10 @@ async function getHolidays(month, day) {
         `/onthisday/holidays/${String(month).padStart(2, "0")}/${String(day).padStart(2, "0")}`
     );
 }
+
+// Get featured content for News Today
+async function getFeaturedContent(year, month, day) {
+    return await fetchWikiFeed(
+        `/featured/${year}/${String(month).padStart(2, "0")}/${String(day).padStart(2, "0")}`
+    );
+}
