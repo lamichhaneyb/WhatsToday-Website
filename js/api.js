@@ -30,3 +30,10 @@ async function getBirthdays(month, day) {
         `/onthisday/births/${String(month).padStart(2, "0")}/${String(day).padStart(2, "0")}`
     );
 }
+
+// Get Holidays
+async function getHolidays(month, day) {
+    return await fetchWikiFeed(
+        `/onthisday/holidays/${String(month).padStart(2, "0")}/${String(day).padStart(2, "0")}`
+    );
+}
