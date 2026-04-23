@@ -1,31 +1,29 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const random = getRandomDate();
+    const today = getToday();
 
-    // Display random date
-    document.querySelectorAll(".random-date-display").forEach(el => {
-        el.textContent = random.shortDate;
+    // display date
+    document.querySelectorAll(".date-display").forEach(el => {
+        el.textContent = today.shortDate;
     });
 
-    // Get events from API
-    const eventData = await getEvents(random.month, random.day);
+    // fetch birthdays
+    const data = await getBirthdays(today.month, today.day);
 
-    // Render event cards if data exists
-    if (eventData && eventData.events) {
-        renderEventCards(eventData.events);
+    if (data && data.births) {
+        renderBirthdayCards(data.births);
     }
 });
 
-function renderEventCards(events) {
+function renderBirthdayCards(births) {
     const grid = document.getElementById("contentGrid");
     grid.innerHTML = "";
 
-    events.slice(0, 8).forEach(event => {
-        const rawTitle =
-            event.pages?.[0]?.title || "Wikipedia_Event";
+    births.slice(0, 10).forEach(person => {
+        const rawTitle = person.pages?.[0]?.title || "Unknown";
 
-        // Create clickable card
         const card = document.createElement("div");
         card.className = "articleCard";
+
         card.style.cursor = "pointer";
 
         card.addEventListener("click", () => {
@@ -35,7 +33,6 @@ function renderEventCards(events) {
             );
         });
 
-        // Article body
         const body = document.createElement("div");
         body.className = "articleBody";
 
@@ -45,20 +42,19 @@ function renderEventCards(events) {
 
         const desc = document.createElement("p");
         desc.className = "articleDesc";
-        desc.textContent = `${event.year}: ${event.text}`;
+        desc.textContent = `Born: ${person.year}`;
 
         body.appendChild(title);
         body.appendChild(desc);
 
         card.appendChild(body);
 
-        // Add image only if available
-        if (event.pages?.[0]?.thumbnail?.source) {
+        if (person.pages?.[0]?.thumbnail?.source) {
             const imageWrapper = document.createElement("div");
             imageWrapper.className = "articleImage";
 
             const img = document.createElement("img");
-            img.src = event.pages[0].thumbnail.source;
+            img.src = person.pages[0].thumbnail.source;
             img.alt = rawTitle;
 
             imageWrapper.appendChild(img);

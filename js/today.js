@@ -1,17 +1,16 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const random = getRandomDate();
+    const today = getToday();
 
-    // Display random date
-    document.querySelectorAll(".random-date-display").forEach(el => {
-        el.textContent = random.shortDate;
+    // display date
+    document.querySelectorAll(".date-display").forEach(el => {
+        el.textContent = today.shortDate;
     });
 
-    // Get events from API
-    const eventData = await getEvents(random.month, random.day);
+    // fetch events
+    const data = await getEvents(today.month, today.day);
 
-    // Render event cards if data exists
-    if (eventData && eventData.events) {
-        renderEventCards(eventData.events);
+    if (data && data.events) {
+        renderEventCards(data.events);
     }
 });
 
