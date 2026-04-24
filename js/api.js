@@ -57,3 +57,19 @@ async function getNearbyArticles(lat, lon, radius = 10000) {
         return null;
     }
 }
+
+// Country coordinates for event map
+const countryCoordinates = {
+    USA: { lat: 38.9072, lon: -77.0369 },
+    France: { lat: 48.8566, lon: 2.3522 },
+    Japan: { lat: 35.6762, lon: 139.6503 },
+    Brazil: { lat: -15.7939, lon: -47.8828 },
+    UK: { lat: 51.5074, lon: -0.1278 },
+    Germany: { lat: 52.5200, lon: 13.4050 },
+    India: { lat: 28.6139, lon: 77.2090 },
+    Canada: { lat: 45.4215, lon: -75.6972 }
+};
+
+function getCountryCoordinates(countryName) {
+    return countryCoordinates[countryName] || null;
+}

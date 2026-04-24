@@ -55,7 +55,8 @@ function renderLocalCards(places) {
 
         const desc = document.createElement("p");
         desc.className = "articleDesc";
-        desc.textContent = `Distance: ${place.dist} meters`;
+        desc.textContent =
+            `Distance: ${(place.dist / 1000).toFixed(1)} km`;
 
         body.appendChild(title);
         body.appendChild(desc);
