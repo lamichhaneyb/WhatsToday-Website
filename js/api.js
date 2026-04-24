@@ -44,3 +44,16 @@ async function getFeaturedContent(year, month, day) {
         `/featured/${year}/${String(month).padStart(2, "0")}/${String(day).padStart(2, "0")}`
     );
 }
+
+// GeoSearch articles nearby (local)
+async function getNearbyArticles(lat, lon, radius = 10000) {
+    const url = `https://en.wikipedia.org/w/api.php?origin=*&action=query&list=geosearch&gscoord=${lat}|${lon}&gsradius=${radius}&gslimit=10&format=json`;
+
+    try {
+        const response = await fetch(url);
+        return await response.json();
+    } catch (error) {
+        console.error("GeoSearch error:", error);
+        return null;
+    }
+}
