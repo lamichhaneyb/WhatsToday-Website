@@ -492,3 +492,118 @@
     margin: 0;
     display: block;
   }
+
+  /* Holiday Page */
+  .holidayContent {
+    position: relative;
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  .centerLine {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #572E2E;
+  }
+
+  .onLine {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    gap: 0;
+  }
+
+  .cardLeft {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .cardLeft .holidayCard {
+    width: calc(50% - 20px);
+    margin-right: 20px;
+  }
+
+  .cardLeft .holidayDot {
+    margin-right: -7px;
+    flex-shrink: 0;
+  }
+
+  .cardRight {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .cardRight .holidayCard {
+    width: calc(50% - 20px);
+    margin-left: 20px;
+  }
+
+  .cardRight .holidayDot {
+    margin-right: -14px;
+    flex-shrink: 0;
+  }
+
+  .holidayDot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #572E2E;
+    border: 3px solid #E7E7E7;
+    z-index: 1;
+    flex-shrink: 0;
+    transform: translateX(-50%);
+  }
+
+  .holidayCard {
+    background: #d8d8d8;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    align-items: center;
+    display: flex;
+  }
+
+  .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .holidayName {
+    color: #572E2E;
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  .holidayDesc {
+    color: #572E2E;
+    font-size: 15px;
+    margin: 0;
+  }
+
+  .holidayImage {
+    width: 180px;
+    min-width: 180px;
+    height: 140px;
+    margin-left: auto;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .textContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 10px;
+  }
+
+
