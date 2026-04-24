@@ -15,45 +15,58 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function renderHolidayCards(holidays) {
-    const grid = document.getElementById("contentGrid");
-    grid.innerHTML = "";
+    const container = document.getElementById("holidayContent");
+    container.innerHTML = '<div class="centerLine"></div>';
 
-    holidays.slice(0, 8).forEach(holiday => {
+    holidays.slice(0, 8).forEach((holiday, index) => {
         const rawTitle =
             holiday.pages?.[0]?.title ||
             holiday.text.split(":")[1]?.trim() ||
             "Holiday";
 
-        const card = document.createElement("div");
-        card.className = "articleCard";
-        card.style.cursor = "pointer";
+        const sideClass = index % 2 === 0
+            ? "cardLeft"
+            : "cardRight";
 
-        card.addEventListener("click", () => {
+        const wrapper = document.createElement("div");
+        wrapper.className = `${sideClass} onLine`;
+
+        wrapper.style.cursor = "pointer";
+
+        wrapper.addEventListener("click", () => {
             window.open(
                 `https://en.wikipedia.org/wiki/${rawTitle}`,
                 "_blank"
             );
         });
 
-        const body = document.createElement("div");
-        body.className = "articleBody";
+        const card = document.createElement("div");
+        card.className = "holidayCard";
 
-        const title = document.createElement("h2");
-        title.className = "articleTitle";
+        const textContent = document.createElement("div");
+        textContent.className = "textContent";
+
+        const header = document.createElement("div");
+        header.className = "cardHeader";
+
+        const title = document.createElement("span");
+        title.className = "holidayName";
         title.textContent = rawTitle.replace(/_/g, " ");
 
         const desc = document.createElement("p");
-        desc.className = "articleDesc";
+        desc.className = "holidayDesc";
         desc.textContent = holiday.text;
 
-        body.appendChild(title);
-        body.appendChild(desc);
+        header.appendChild(title);
+        textContent.appendChild(header);
+        textContent.appendChild(desc);
 
-        card.appendChild(body);
+        card.appendChild(textContent);
 
+        // optional image
         if (holiday.pages?.[0]?.thumbnail?.source) {
             const imageWrapper = document.createElement("div");
-            imageWrapper.className = "articleImage";
+            imageWrapper.className = "holidayImage";
 
             const img = document.createElement("img");
             img.src = holiday.pages[0].thumbnail.source;
@@ -63,6 +76,17 @@ function renderHolidayCards(holidays) {
             card.appendChild(imageWrapper);
         }
 
-        grid.appendChild(card);
+        const dot = document.createElement("div");
+        dot.className = "holidayDot";
+
+        if (sideClass === "cardLeft") {
+            wrapper.appendChild(card);
+            wrapper.appendChild(dot);
+        } else {
+            wrapper.appendChild(dot);
+            wrapper.appendChild(card);
+        }
+
+        container.appendChild(wrapper);
     });
 }
