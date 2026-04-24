@@ -1,17 +1,13 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const today = new Date();
+    const today = getToday();
 
-    const year = today.getFullYear();
-    const month = today.getMonth() + 1;
-    const day = today.getDate();
+    const month = today.month;
+    const day = today.day;
+    const year = new Date().getFullYear();
 
     // display date
     document.querySelectorAll(".date-display").forEach(el => {
-        el.textContent = today.toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric"
-        });
+        el.textContent = today.longDate;
     });
 
     const data = await getFeaturedContent(year, month, day);

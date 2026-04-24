@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // display date
     document.querySelectorAll(".date-display").forEach(el => {
-        el.textContent = today.shortDate;
+        el.textContent = today.longDate;
     });
 
     // fetch birthdays
@@ -14,16 +14,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-function renderBirthdayCards(births) {
-    const grid = document.getElementById("contentGrid");
+function renderBirthdayCards(birthdays) {
+    const grid = document.getElementById("birthdayGrid");
     grid.innerHTML = "";
 
-    births.slice(0, 10).forEach(person => {
-        const rawTitle = person.pages?.[0]?.title || "Unknown";
+    birthdays.slice(0, 8).forEach(person => {
+        const rawTitle =
+            person.pages?.[0]?.title || "Wikipedia Person";
 
         const card = document.createElement("div");
-        card.className = "articleCard";
-
+        card.className = "birthdayCard";
         card.style.cursor = "pointer";
 
         card.addEventListener("click", () => {
@@ -33,33 +33,43 @@ function renderBirthdayCards(births) {
             );
         });
 
-        const body = document.createElement("div");
-        body.className = "articleBody";
-
-        const title = document.createElement("h2");
-        title.className = "articleTitle";
-        title.textContent = rawTitle.replace(/_/g, " ");
-
-        const desc = document.createElement("p");
-        desc.className = "articleDesc";
-        desc.textContent = `Born: ${person.year}`;
-
-        body.appendChild(title);
-        body.appendChild(desc);
-
-        card.appendChild(body);
+        // image
+        const imageWrapper = document.createElement("div");
+        imageWrapper.className = "birthdayImage";
 
         if (person.pages?.[0]?.thumbnail?.source) {
-            const imageWrapper = document.createElement("div");
-            imageWrapper.className = "articleImage";
-
             const img = document.createElement("img");
             img.src = person.pages[0].thumbnail.source;
-            img.alt = rawTitle;
-
+            img.alt = rawTitle.replace(/_/g, " ");
             imageWrapper.appendChild(img);
-            card.appendChild(imageWrapper);
         }
+
+        // info row
+        const info = document.createElement("div");
+        info.className = "birthdayInfo";
+
+        const name = document.createElement("span");
+        name.className = "birthdayName";
+        name.textContent = rawTitle.replace(/_/g, " ");
+
+        const year = document.createElement("span");
+        year.className = "birthdayYear";
+        year.textContent = person.year;
+
+        info.appendChild(name);
+        info.appendChild(year);
+
+        // description
+        const desc = document.createElement("p");
+        desc.className = "birthdayDesc";
+        desc.textContent =
+            person.pages?.[0]?.description ||
+            `${person.year} birth`;
+
+        // build card
+        card.appendChild(imageWrapper);
+        card.appendChild(info);
+        card.appendChild(desc);
 
         grid.appendChild(card);
     });

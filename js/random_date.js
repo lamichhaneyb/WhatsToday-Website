@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // display date
     document.querySelectorAll(".date-display").forEach(el => {
-        el.textContent = today.shortDate;
+        el.textContent = today.longDate;
     });
 
     // Get events from API
