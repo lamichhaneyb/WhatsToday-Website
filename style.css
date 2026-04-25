@@ -15,6 +15,13 @@
       background: #d8d8d8;
       padding: 0 12px;
     }
+
+    .current {
+      font-size: 17px;
+      text-decoration: underline;
+      text-decoration-color: #572E2E;
+      text-decoration-thickness: 2px;
+    }
  
     .nav {
       background: #E7E7E7;
@@ -52,7 +59,7 @@
  
     .nav-links a {
       color: #572E2E;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       text-decoration: none;
       display: flex;
