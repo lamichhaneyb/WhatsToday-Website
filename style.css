@@ -17,7 +17,7 @@
     }
 
     .current {
-      font-size: 17px;
+      font-size: 25px;
       text-decoration: underline;
       text-decoration-color: #572E2E;
       text-decoration-thickness: 2px;
@@ -39,12 +39,15 @@
  
     .nav-logo {
       color: #572E2E;
-      font-size: 20px;
-      font-weight: 900;
+      font-family: "Jaro", sans-serif;
+      font-size: 30px;
+      font-weight: 590;
       flex-shrink: 0;
       padding: 0 20px;
-      text-decoration: underline;
-      text-decoration-color: #E7E7E7;
+    }
+
+    .nav a{
+      text-decoration: none;
     }
 
     .nav-logo:hover {
@@ -59,8 +62,9 @@
  
     .nav-links a {
       color: #572E2E;
-      font-size: 14px;
-      font-weight: 700;
+      font-family: "Jaro", sans-serif;
+      font-size: 20px;
+      font-weight: 500;
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -126,11 +130,27 @@
       align-items: center;
     }
 
+    .content-inner h2 {
+      color: #572E2E;
+    }
+
+    .buttons {
+      font-size: 15px;
+      margin-top: 20px;
+      border-radius: 10px;
+      border-color:#572E2E;
+      padding: 5px;
+    }
+
+    .buttons:hover{
+      cursor: pointer;
+    }
+
     .page-title {
       color: #572E2E;
-      font-size: 36px;
-      font-weight: 900;
-      font-family: 'Arial Black', Arial, sans-serif;
+      font-size: 70px;
+      font-weight: 100;
+      font-family: "Jaro", sans-serif;
       margin-bottom: 24px;
       text-align: center;
     }
