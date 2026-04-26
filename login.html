@@ -8,17 +8,17 @@
   <title>WhatsToday?</title>
 </head>
 <body>
- <form action="submit" class = "form-Main">
+   <form action="/post" method="POST" class = "form-Main">
    <div class="form-container">
         <div class="form-header">
             <h3>Sign Up</h3>
         </div>
         <div class="input-container">
-            <input type="text" placeholder="Username" required> 
-            <input type="email" placeholder="Email Address " required> 
-            <input type="password" placeholder="Create Password" required>
-            <input type="password" placeholder="Re-Enter password" required>     
-            <button class="submit" type="submit" formaction="index.html" formtarget="_blank">SIGN UP</button> 
+        <input type="text" placeholder="Username" required name="username"> 
+        <input type="email" placeholder="Email Address " required name="email"> 
+        <input type="password" name = 'password' placeholder="Create Password" required >
+        <input type="password" name = 'repassword' placeholder="Re-Enter password" required>     
+        <button class="submit" type="submit">SIGN UP</button> 
         <div class="signup">
              Already Have An Account?
              <a href="index.html"> Log In</a>  
