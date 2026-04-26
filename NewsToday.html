@@ -30,51 +30,23 @@
 
       <main class="content">
         <div class="content-inner">
-          <h1 class="page-title">News Today</span></h1>
-          
-          <div class=filter>
-            <input type="text" id="keywordFilter" class="filterInput" placeholder="Filter by keyword">
-            <!-- Filter bar -->
-          </div>
 
-          <div class="contentArea" id="contentGrid">
-              <div class="articleCard">
-                <div class="articleBody">
-                  <h2 class="articleTitle">Title Here</h2>
-                  <p class="articleDesc">Text here</p>
-                </div>
-                <div class="articleImage">
-                  <img src="image link" alt="Article Image">
-                </div>
-              </div>
+          <h1 class="page-title">News Today</h1>
 
-              <div class="articleCard">
-                <div class="articleBody">
-                  <h2 class="articleTitle">Title Here</h2>
-                  <p class="articleDesc">Text here</p>
-                </div>
-                <div class="articleImage">
-                  <img src="image link" alt="Article Image">
-                </div>
-              </div>  
+          <h2>Featured Article</h2>
+          <div id="featuredContainer"></div>
 
-              <div class="articleCard">
-                <div class="articleBody">
-                  <h2 class="articleTitle">Title Here</h2>
-                  <p class="articleDesc">Text here</p>
-                </div>
-                <div class="articleImage">
-                  <img src="image link" alt="Article Image">
-                </div>
-              </div>  
+          <h2>Today's Articles</h2>
+          <div id="todayArticlesContainer"></div>
 
-              
+          <h2>Yesterday's Most Viewed</h2>
+          <div id="mostViewedContainer"></div>
 
-            </div>
-          </div>
         </div>
       </main>
     </div>
     <script src="js/date.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/news-today.js"></script>
   </body>
 </html>

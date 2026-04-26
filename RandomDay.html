@@ -30,52 +30,27 @@
 
     <main class="content">
       <div class="content-inner">
-        <h1 class="page-title"><span class="random-date-display"></h1>
+        <h1 class="page-title">
+          <span class="random-date-display"></span>
+        </h1>
           
         <div class=filter>
             <input type="text" id="keywordFilter" class="filterInput" placeholder="Filter by keyword">
             <!-- Filter bar -->
+        </div>
+
+          <div class="contentArea" id="contentGrid"></div>
+
+          <div class="pagination">
+              <button id="prevPage">Previous</button>
+              <button id="nextPage">Next</button>
           </div>
-
-          <div class="contentArea" id="contentGrid">
-              <div class="articleCard">
-                <div class="articleBody">
-                  <h2 class="articleTitle">Title Here</h2>
-                  <p class="articleDesc">Text here</p>
-                </div>
-                <div class="articleImage">
-                  <img src="image link" alt="Article Image">
-                </div>
-              </div>
-
-              <div class="articleCard">
-                <div class="articleBody">
-                  <h2 class="articleTitle">Title Here</h2>
-                  <p class="articleDesc">Text here</p>
-                </div>
-                <div class="articleImage">
-                  <img src="image link" alt="Article Image">
-                </div>
-              </div>  
-
-              <div class="articleCard">
-                <div class="articleBody">
-                  <h2 class="articleTitle">Title Here</h2>
-                  <p class="articleDesc">Text here</p>
-                </div>
-                <div class="articleImage">
-                  <img src="image link" alt="Article Image">
-                </div>
-              </div>  
-
-              
-
-            </div>
           </div>
         </div>
       </main>
     </div>
   <script src="js/date.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/random_date.js"></script>
 </body>
 </html>
