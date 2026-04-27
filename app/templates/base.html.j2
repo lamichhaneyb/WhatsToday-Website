@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap" rel="stylesheet">
+  <title>WhatsToday?</title>
+</head>
+<body>
+  {% include "components/nav.html.j2" %}
+  <div class="wrapper">
+    <aside class="sidebar">
+      <div class="date-pill">
+        <span class="date-display date-long">{{ today.long if today is defined else "" }}</span>
+      </div>
+    </aside>
+    <main class="content">
+      <div class="content-inner">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flashMessages">
+              {% for message in messages %}<p>{{ message }}</p>{% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+  </div>
+  <div class="loginModalBackdrop" id="loginRequiredModal" hidden>
+    <div class="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+      <button class="modalClose" type="button" aria-label="Close">×</button>
+      <h2 id="loginModalTitle">Log in to save articles</h2>
+      <p>Create a collection of articles you want to come back to later.</p>
+      <div class="modalActions">
+        <a class="modalPrimary" href="{{ url_for('auth.login_form') }}">Log In</a>
+        <button class="modalSecondary" type="button">Not now</button>
+      </div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/save-modal.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

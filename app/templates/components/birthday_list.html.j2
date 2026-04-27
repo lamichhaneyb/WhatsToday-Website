@@ -1,0 +1,17 @@
+{% for article in articles %}
+<article class="birthdayCard" onclick="window.open('{{ article.url }}', '_blank')">
+  {% if current_user %}
+  <form class="saveForm saveFormFloating" action="{{ url_for('saved.add_saved_article') }}" method="post" onclick="event.stopPropagation()">
+    <input type="hidden" name="title" value="{{ article.title }}"><input type="hidden" name="description" value="{{ article.description }}"><input type="hidden" name="url" value="{{ article.url }}"><input type="hidden" name="image_url" value="{{ article.image_url or '' }}"><input type="hidden" name="source" value="{{ article.source }}"><input type="hidden" name="article_type" value="{{ article.article_type }}">
+    <button class="bookmarkButton" type="submit" title="Save article" aria-label="Save article"><span aria-hidden="true"></span></button>
+  </form>
+  {% else %}
+    <button class="bookmarkButton saveFormFloating loginRequiredSave" type="button" title="Save article" aria-label="Save article" onclick="event.stopPropagation()"><span aria-hidden="true"></span></button>
+  {% endif %}
+  <div class="birthdayImage {% if not article.image_url %}articleImagePlaceholder{% endif %}">{% if article.image_url %}<img src="{{ article.image_url }}" alt="{{ article.title }}" loading="lazy">{% else %}<span>W</span>{% endif %}</div>
+  <div class="birthdayInfo">
+    <span class="birthdayName">{{ article.title }}</span>
+    <span class="birthdayYear">{{ article.description }}</span>
+  </div>
+</article>
+{% endfor %}

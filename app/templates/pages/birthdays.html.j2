@@ -1,0 +1,9 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<h1 class="page-title">Birthdays Today</h1>
+<div class="birthdayGrid" id="birthdayGrid">{% include "components/birthday_list.html.j2" %}</div>
+{% if total > page_size %}
+<div class="pagination"><button class="buttons loadMore" data-container="#birthdayGrid" data-url="{{ url_for('partials.more_birthdays') }}" data-offset="{{ page_size }}" data-limit="{{ page_size }}">Load More</button></div>
+{% endif %}
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/load-more.js') }}"></script>{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<h1 class="page-title">Event Map</h1>
+<div class="placeholder">
+  <div class="map-layout">
+    <div id="svgMapWrap"></div>
+    <div class="map-side-panel">
+      <h2 id="selectedCountry">United States</h2>
+      <div class="contentArea" id="contentGrid"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/event-map.js') }}"></script>{% endblock %}

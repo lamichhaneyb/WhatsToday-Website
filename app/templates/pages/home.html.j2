@@ -1,0 +1,12 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<h1 class="page-title">{{ today.short }}</h1>
+<div class="filter"><input type="text" id="keywordFilter" class="filterInput" placeholder="Filter by keyword"></div>
+<div class="contentArea" id="contentGrid">
+  {% include "components/article_list.html.j2" %}
+</div>
+{% if total > page_size %}
+<div class="pagination"><button class="buttons loadMore" data-url="{{ url_for('partials.more_events', month=today.month, day=today.day) }}" data-offset="{{ page_size }}" data-limit="{{ page_size }}">Load More</button></div>
+{% endif %}
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/load-more.js') }}"></script>{% endblock %}

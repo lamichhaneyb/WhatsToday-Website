@@ -1,0 +1,14 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<section class="pageHero">
+  <p class="eyebrow">Today</p>
+  <h1 class="page-title">Holidays</h1>
+</section>
+<div class="holidayContent" id="holidayContent">
+  {% include "components/holiday_list.html.j2" %}
+</div>
+{% if total > page_size %}
+<div class="pagination"><button class="buttons loadMore" data-container="#holidayContent" data-url="{{ url_for('partials.more_holidays') }}" data-offset="{{ page_size }}" data-limit="{{ page_size }}">Load More</button></div>
+{% endif %}
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/load-more.js') }}"></script>{% endblock %}

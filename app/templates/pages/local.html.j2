@@ -1,0 +1,35 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<h1 class="page-title">Local News</h1>
+<div class="localContainer">
+  <section class="localSection">
+    <h2 class="sectionTitle clickable">Trending Near You</h2>
+    <div class="horizontalScroll" id="trendingSection">
+      {% for article in rss_articles[:5] %}
+        <div class="scrollCard localPreviewCard" onclick="window.open('{{ article.url }}', '_blank')">
+          <div class="localPreviewImage {% if not article.image_url %}articleImagePlaceholder{% endif %}">{% if article.image_url %}<img src="{{ article.image_url }}" alt="{{ article.title }}" loading="lazy">{% else %}<span>PNG</span>{% endif %}</div>
+          <div class="cardContent"><p class="cardTitle">{{ article.title }}</p></div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="localSection">
+    <h2 class="sectionTitle clickable">Live Around You</h2>
+    <div class="horizontalScroll" id="liveSection">
+      {% for article in rss_articles[2:7] %}
+        <div class="scrollCard localPreviewCard" onclick="window.open('{{ article.url }}', '_blank')">
+          <div class="videoWrapper localPreviewImage {% if not article.image_url %}articleImagePlaceholder{% endif %}"><span class="liveBadge">LIVE</span>{% if article.image_url %}<img src="{{ article.image_url }}" alt="{{ article.title }}" loading="lazy">{% else %}<span>PNG</span>{% endif %}</div>
+          <div class="cardContent"><p class="cardTitle">{{ article.title }}</p></div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="localSection"><h2 class="sectionTitle clickable">Alerts & Updates</h2><div class="verticalFeed" id="alertsSection">{% for article in rss_articles[:3] %}<div class="alertItem" onclick="window.open('{{ article.url }}', '_blank')">{{ article.title }}</div>{% endfor %}</div></section>
+  <section class="localSection"><h2 class="sectionTitle clickable">Explore Nearby</h2><div class="gridLayout" id="exploreSection">{% for name, emoji in [('Food','🍔'),('Cafes','☕'),('Events','🎉'),('Parks','🌳'),('Shopping','🛍️'),('Movies','🎬')] %}<div class="gridCard" onclick="window.open('https://www.google.com/search?q={{ name }}+near+me', '_blank')"><div class="exploreContent"><span class="exploreEmoji">{{ emoji }}</span><span>{{ name }}</span></div></div>{% endfor %}</div></section>
+  <section class="localSection"><h2 class="sectionTitle clickable">Recommended For You</h2><div class="horizontalScroll" id="recommendedSection">{% for article in rss_articles[5:10] %}<div class="scrollCard localPreviewCard" onclick="window.open('{{ article.url }}', '_blank')"><div class="localPreviewImage {% if not article.image_url %}articleImagePlaceholder{% endif %}">{% if article.image_url %}<img src="{{ article.image_url }}" alt="{{ article.title }}" loading="lazy">{% else %}<span>PNG</span>{% endif %}</div><div class="cardContent"><p class="cardTitle">{{ article.title }}</p></div></div>{% endfor %}</div></section>
+  <div class="contentArea" id="contentGrid">{% with articles=wiki_articles %}{% include "components/article_list.html.j2" %}{% endwith %}</div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/local-ui.js') }}"></script>{% endblock %}

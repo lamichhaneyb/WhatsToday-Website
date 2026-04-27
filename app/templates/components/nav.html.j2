@@ -1,0 +1,26 @@
+<header class="siteHeader">
+  <nav class="nav" aria-label="Main navigation">
+    <a class="nav-brand" href="{{ url_for('main.home') }}">WhatsToday?</a>
+
+    <div class="nav-links nav-main-links">
+      <a class="navLink {{ 'active' if page == 'news' else '' }}" href="{{ url_for('main.news_today') }}">News Today</a>
+      <a class="navLink {{ 'active' if page == 'holidays' else '' }}" href="{{ url_for('main.holidays') }}">Holidays</a>
+      <a class="navLink {{ 'active' if page == 'local' else '' }}" href="{{ url_for('main.local') }}">Local</a>
+      <a class="navLink {{ 'active' if page == 'map' else '' }}" href="{{ url_for('main.event_map') }}">Event Map</a>
+      <a class="navLink {{ 'active' if page == 'birthdays' else '' }}" href="{{ url_for('main.birthdays') }}">Birthdays</a>
+      <a class="navLink {{ 'active' if page == 'random' else '' }}" href="{{ url_for('main.random_day') }}">Random Day</a>
+      <a class="navLink {{ 'active' if page == 'saved' else '' }}" href="{{ url_for('saved.saved_articles') }}">Saved</a>
+    </div>
+
+    <div class="auth-actions">
+      {% if current_user %}
+        <span class="auth-name">{{ current_user.username }}</span>
+        <form class="logoutForm" action="{{ url_for('auth.logout') }}" method="post">
+          <button class="auth-link auth-button" type="submit">Log Out</button>
+        </form>
+      {% else %}
+        <a class="auth-link auth-link-primary" href="{{ url_for('auth.login_form') }}">Log In</a>
+      {% endif %}
+    </div>
+  </nav>
+</header>

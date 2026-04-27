@@ -1,0 +1,10 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<h1 class="page-title">News Today</h1>
+<h2>Featured Article</h2>
+<div id="featuredContainer">{% with articles=sections.featured %}{% include "components/article_list.html.j2" %}{% endwith %}</div>
+<h2>Today's Articles</h2>
+<div id="todayArticlesContainer">{% with articles=sections.today[:page_size] %}{% include "components/article_list.html.j2" %}{% endwith %}</div>
+<h2>Yesterday's Most Viewed</h2>
+<div id="mostViewedContainer">{% with articles=sections.most_viewed[:page_size] %}{% include "components/article_list.html.j2" %}{% endwith %}</div>
+{% endblock %}

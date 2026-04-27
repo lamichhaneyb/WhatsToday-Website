@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap" rel="stylesheet">
+  <title>Log In - WhatsToday?</title>
+</head>
+<body class="authPage">
+  <main class="form-Main">
+    <section class="form-container">
+      <div class="form-header">
+        <h3>Log In</h3>
+      </div>
+
+      <form action="{{ url_for('auth.login') }}" method="POST" id="login-form" class="input-container">
+        {% for message in get_flashed_messages() %}<p class="formError">{{ message }}</p>{% endfor %}
+        <input type="text" placeholder="Email or Username" required name="login">
+        <input type="password" name="password" placeholder="Password" required>
+        <button class="submit" type="submit">Log In</button>
+      </form>
+
+      <div class="authSplit">
+        <p class="signup">Need an account? <a href="{{ url_for('auth.signup_form') }}">Create one here</a></p>
+        <a class="signup authBack" href="{{ url_for('main.home') }}">Back to WhatsToday</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

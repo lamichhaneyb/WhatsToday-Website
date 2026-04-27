@@ -1,0 +1,24 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<section class="pageHero">
+  <p class="eyebrow">Your collection</p>
+  <h1 class="page-title">Saved Articles</h1>
+</section>
+<div class="contentArea" id="contentGrid">
+  {% for article in articles %}
+  <article class="articleCard" onclick="window.open('{{ article.url }}', '_blank')">
+    <form class="saveForm saveFormFloating" action="{{ url_for('saved.delete_saved_article', article_id=article.id) }}" method="post" onclick="event.stopPropagation()">
+      <button class="removeBookmarkButton" type="submit" title="Remove saved article" aria-label="Remove saved article">×</button>
+    </form>
+    <div class="articleImage {% if not article.image_url %}articleImagePlaceholder{% endif %}">{% if article.image_url %}<img src="{{ article.image_url }}" alt="{{ article.title }}" loading="lazy">{% else %}<span>S</span>{% endif %}</div>
+    <div class="articleBody">
+      <p class="articleSource">Saved</p>
+      <h2 class="articleTitle">{{ article.title }}</h2>
+      <p class="articleDesc">{{ article.description }}</p>
+    </div>
+  </article>
+  {% else %}
+  <p class="emptyState">No saved articles yet. Use the bookmark button on any article to build your list.</p>
+  {% endfor %}
+</div>
+{% endblock %}
