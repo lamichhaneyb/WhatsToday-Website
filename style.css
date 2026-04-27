@@ -134,6 +134,12 @@
       color: #572E2E;
     }
 
+    .pagination {
+      display: flex;
+      gap: 30px;
+      margin-left: 630px;
+    }
+
     .buttons {
       font-size: 15px;
       margin-top: 20px;
@@ -458,6 +464,7 @@
  /* Birthdays Page */
  .birthdayGrid {
     display: grid;
+    margin-left: 230px;
     grid-template-columns: repeat(3, 1fr);
     gap: 50px;
     row-gap: 20px;
