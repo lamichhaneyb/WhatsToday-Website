@@ -40,17 +40,39 @@ function createCard(label, type) {
     });
   
     // explore
-    const explore = document.getElementById("exploreSection");
-    ["Food", "Cafes", "Events", "Places"].forEach(text => {
-      const div = document.createElement("div");
-      div.className = "gridCard";
-      div.innerText = text;
-  
-      div.dataset.type = "explore";
-      div.dataset.value = text;
-  
-      explore.appendChild(div);
-    });
+const explore = document.getElementById("exploreSection");
+
+if (explore) {
+
+  explore.innerHTML = "";
+
+  const categories = [
+    { name: "Food", emoji: "🍔" },
+    { name: "Cafes", emoji: "☕" },
+    { name: "Events", emoji: "🎉" },
+    { name: "Parks", emoji: "🌳" },
+    { name: "Shopping", emoji: "🛍️" },
+    { name: "Movies", emoji: "🎬" }
+  ];
+
+  categories.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "gridCard";
+
+    div.innerHTML = `
+      <div class="exploreContent">
+        <span class="exploreEmoji">${item.emoji}</span>
+        <span>${item.name}</span>
+      </div>
+    `;
+
+    div.dataset.type = "explore";
+    div.dataset.value = item.name;
+
+    explore.appendChild(div);
+  });
+
+}
   
     // recommended
     const recommended = document.getElementById("recommendedSection");

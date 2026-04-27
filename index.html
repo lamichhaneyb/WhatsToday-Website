@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href = "style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap" rel="stylesheet">
+
     <title>WhatsToday?</title>
   </head>
   <body>
@@ -37,43 +41,19 @@
             <!-- Filter bar -->
           </div>
 
-          <div class="contentArea" id="contentGrid">
-              <div class="articleCard">
-                <div class="articleBody">
-                  <h2 class="articleTitle">Title Here</h2>
-                  <p class="articleDesc">Text here</p>
-                </div>
-                <div class="articleImage">
-                  <img src="image link" alt="Article Image">
-                </div>
-              </div>
+          <div class="contentArea" id="contentGrid"></div>
 
-              <div class="articleCard">
-                <div class="articleBody">
-                  <h2 class="articleTitle">Title Here</h2>
-                  <p class="articleDesc">Text here</p>
-                </div>
-                <div class="articleImage">
-                  <img src="image link" alt="Article Image">
-                </div>
-              </div>  
-
-              <div class="articleCard">
-                <div class="articleBody">
-                  <h2 class="articleTitle">Title Here</h2>
-                  <p class="articleDesc">Text here</p>
-                </div>
-                <div class="articleImage">
-                  <img src="image link" alt="Article Image">
-                </div>
-              </div>  
-
-            </div>
+          <div class="pagination">
+              <button class="buttons" id="prevPage">Previous</button>
+              <button class="buttons" id="nextPage">Next</button>
+          </div>
           </div>
         </div>
       </main>
     </div>
     <script src="js/date.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/whatsToday.js"></script>
   </body>
   
 </html>

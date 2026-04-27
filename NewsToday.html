@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href = "style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap" rel="stylesheet">
     <title>WhatsToday?</title>
   </head>
   <body>
@@ -11,9 +14,9 @@
     <nav class="nav">
       <a href="index.html"><span class="nav-logo">WhatsToday?</span></a>
       <div class="nav-links">
-        <a href="NewsToday.html">News Today</a>
+        <a href="NewsToday.html"> <span class="current">News Today</span></a>
         <a href="Holidays.html">Holidays</a>
-        <a href="Timeline.html">Timeline</a>
+        <a href="login.html">Sign Up</a>
         <a href="Local.html">Local</a>
         <a href="EventMap.html">Event Map</a>
         <a href="Birthdays.html">Birthdays</a>
@@ -30,51 +33,23 @@
 
       <main class="content">
         <div class="content-inner">
-          <h1 class="page-title">News Today</span></h1>
-          
-          <div class=filter>
-            <input type="text" id="keywordFilter" class="filterInput" placeholder="Filter by keyword">
-            <!-- Filter bar -->
-          </div>
 
-          <div class="contentArea" id="contentGrid">
-              <div class="articleCard">
-                <div class="articleBody">
-                  <h2 class="articleTitle">Title Here</h2>
-                  <p class="articleDesc">Text here</p>
-                </div>
-                <div class="articleImage">
-                  <img src="image link" alt="Article Image">
-                </div>
-              </div>
+          <h1 class="page-title">News Today</h1>
 
-              <div class="articleCard">
-                <div class="articleBody">
-                  <h2 class="articleTitle">Title Here</h2>
-                  <p class="articleDesc">Text here</p>
-                </div>
-                <div class="articleImage">
-                  <img src="image link" alt="Article Image">
-                </div>
-              </div>  
+          <h2>Featured Article</h2>
+          <div id="featuredContainer"></div>
 
-              <div class="articleCard">
-                <div class="articleBody">
-                  <h2 class="articleTitle">Title Here</h2>
-                  <p class="articleDesc">Text here</p>
-                </div>
-                <div class="articleImage">
-                  <img src="image link" alt="Article Image">
-                </div>
-              </div>  
+          <h2>Today's Articles</h2>
+          <div id="todayArticlesContainer"></div>
 
-              
+          <h2>Yesterday's Most Viewed</h2>
+          <div id="mostViewedContainer"></div>
 
-            </div>
-          </div>
         </div>
       </main>
     </div>
     <script src="js/date.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/news-today.js"></script>
   </body>
 </html>

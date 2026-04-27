@@ -4,29 +4,23 @@ let allEvents = [];
 let filteredEvents = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const random = getRandomDate();
     const today = getToday();
 
-    // Display random date
-    document.querySelectorAll(".random-date-display").forEach(el => {
-        el.textContent = random.shortDate;
-    });
-
-    // display date
+    // Display date
     document.querySelectorAll(".date-display").forEach(el => {
         el.textContent = today.longDate;
     });
 
-    // Get events from API
-    const eventData = await getEvents(random.month, random.day);
+    // Fetch events
+    const data = await getEvents(today.month, today.day);
 
-    if (eventData && eventData.events) {
-        allEvents = eventData.events;
+    if (data && data.events) {
+        allEvents = data.events;
         filteredEvents = allEvents;
         renderCurrentPage();
     }
 
-    // Setup search filter
+    // Setup filter
     const filterInput = document.getElementById("keywordFilter");
 
     if (filterInput) {
@@ -41,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (nextBtn) {
         nextBtn.addEventListener("click", () => {
-            if (currentPage * ITEMS_PER_PAGE < filteredEvents.length) {
+            if (currentPage * ITEMS_PER_PAGE < allEvents.length) {
                 currentPage++;
                 renderCurrentPage();
             }
@@ -75,7 +69,6 @@ function renderEventCards(events) {
         const rawTitle =
             event.pages?.[0]?.title || "Wikipedia_Event";
 
-        // Create clickable card
         const card = document.createElement("div");
         card.className = "articleCard";
         card.style.cursor = "pointer";
@@ -87,7 +80,7 @@ function renderEventCards(events) {
             );
         });
 
-        // Article body
+        // Body
         const body = document.createElement("div");
         body.className = "articleBody";
 
@@ -104,7 +97,6 @@ function renderEventCards(events) {
 
         let imageWrapper = null;
 
-        // Add image only if available
         if (event.pages?.[0]?.thumbnail?.source) {
             imageWrapper = document.createElement("div");
             imageWrapper.className = "articleImage";

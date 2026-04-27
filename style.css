@@ -15,6 +15,13 @@
       background: #d8d8d8;
       padding: 0 12px;
     }
+
+    .current {
+      font-size: 25px;
+      text-decoration: underline;
+      text-decoration-color: #572E2E;
+      text-decoration-thickness: 2px;
+    }
  
     .nav {
       background: #E7E7E7;
@@ -32,12 +39,15 @@
  
     .nav-logo {
       color: #572E2E;
-      font-size: 20px;
-      font-weight: 900;
+      font-family: "Jaro", sans-serif;
+      font-size: 30px;
+      font-weight: 590;
       flex-shrink: 0;
       padding: 0 20px;
-      text-decoration: underline;
-      text-decoration-color: #E7E7E7;
+    }
+
+    .nav a{
+      text-decoration: none;
     }
 
     .nav-logo:hover {
@@ -52,8 +62,9 @@
  
     .nav-links a {
       color: #572E2E;
-      font-size: 13px;
-      font-weight: 700;
+      font-family: "Jaro", sans-serif;
+      font-size: 20px;
+      font-weight: 500;
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -116,14 +127,30 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
+    }
+
+    .content-inner h2 {
+      color: #572E2E;
+    }
+
+    .buttons {
+      font-size: 15px;
+      margin-top: 20px;
+      border-radius: 10px;
+      border-color:#572E2E;
+      padding: 5px;
+    }
+
+    .buttons:hover{
+      cursor: pointer;
     }
 
     .page-title {
       color: #572E2E;
-      font-size: 36px;
-      font-weight: 900;
-      font-family: 'Arial Black', Arial, sans-serif;
+      font-size: 70px;
+      font-weight: 100;
+      font-family: "Jaro", sans-serif;
       margin-bottom: 24px;
       text-align: center;
     }
@@ -424,7 +451,7 @@
  }
  .signup a {
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: #572E2E;
     cursor: pointer;
  }
 
@@ -607,3 +634,225 @@
   }
 
 
+
+/* trending cards */
+
+.scrollCard {
+  min-width: 260px;
+  max-width: 260px;
+  height: 200px;
+
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #ccc;
+  flex-shrink: 0; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* image full width */
+.cardImage {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+/* content area */
+.cardContent {
+  padding: 10px;
+}
+
+/* title */
+.cardTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #572E2E;
+  text-align: left;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* scroll spacing */
+.horizontalScroll {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.horizontalScroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* hover */
+.scrollCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* fake video style */
+
+.videoWrapper {
+  position: relative;
+}
+
+.videoWrapper img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.liveBadge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: red;
+  color: white;
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+.cardImage {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.videoWrapper img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.gridCard {
+  background: #f0f0f0;
+  height: 100px;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 600;
+  color: #572E2E;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.gridCard:hover {
+  transform: scale(1.05);
+  background: #e0e0e0;
+}
+
+#map {
+  width: 100%;
+  height: 420px;
+  border-radius: 12px;
+  border: 1px solid #b4b4b4;
+  margin-bottom: 20px;
+}
+
+.map-layout {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+#svgMapWrap {
+  width: 100%;
+  background: #e0e0e0;
+  border: 1px solid #b4b4b4;
+  border-radius: 12px;
+  padding: 16px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+#svgMapWrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#svgMapWrap g {
+  cursor: pointer;
+}
+
+#svgMapWrap g path {
+  fill: #c9c9c9;
+  stroke: #ffffff;
+  stroke-width: 0.4;
+}
+
+#svgMapWrap g.country:hover path {
+  fill: #a88989;
+}
+
+#svgMapWrap g.country.selected-country path {
+  fill: #572E2E;
+}
+
+.mapArticleCard {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid #b4b4b4;
+  border-radius: 12px;
+  background: #e6e6e6;
+  align-items: center;
+  min-height: 120px;
+}
+
+.mapArticleImage {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.mapArticleCard.no-image {
+  padding-left: 20px;
+}
+
+.mapArticleBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.mapArticleTitle {
+  font-size: 18px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mapArticleDesc {
+  font-size: 14px;
+  margin: 0;
+}
+
+#contentGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+@media (max-width: 800px) {
+  #contentGrid {
+    grid-template-columns: 1fr;
+  }
+}

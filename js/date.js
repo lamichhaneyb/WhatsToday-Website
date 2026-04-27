@@ -1,37 +1,47 @@
+// Split functions up
+// Gets the suffixes
+function getSuffix(n) {
+    if (n > 3 && n < 21) return "th";
+    switch (n % 10) {
+        case 1: return "st";
+        case 2: return "nd";
+        case 3: return "rd";
+        default: return "th";
+    }
+}
+// New random Date fucntion
+function getRandomDate() {
+    const year = new Date().getFullYear();
 
-// Gets todays date
-function displayTodaysDate() {
-    const date = new Date();
-    const day = date.getDate();
-    const year = date.getFullYear();
-    const month = date.toLocaleString('default', { month: 'long' });
+    const start = new Date(year, 0, 1).getTime();
+    const end = new Date(year, 11, 31).getTime();
 
-    // Date suffixes
-    const getSuffix = (n) => {
-        if (n > 3 && n < 21) return 'th'; 
-        switch (n % 10) {
-            case 1:  return "st";
-            case 2:  return "nd";
-            case 3:  return "rd";
-            default: return "th";
-        }
-    };
+    const randomTimestamp = Math.floor(
+        Math.random() * (end - start + 1) + start
+    );
 
-    const suffix = getSuffix(day);
-    
-    // Format 1: April 9th
-    const shortDate = `${month} ${day}${suffix}`;
-    // Format 2: April 9th, 2026
-    const longDate = `${month} ${day}${suffix}, ${year}`;
+    const randomDate = new Date(randomTimestamp);
 
-    // Find all elements and check their classes
-    document.querySelectorAll('.date-display').forEach(element => {
-        if (element.classList.contains('date-long')) {
-            element.textContent = longDate;
-        } else {
-            element.textContent = shortDate;
-        }
+    const day = randomDate.getDate();
+    const monthName = randomDate.toLocaleString("default", {
+        month: "long"
     });
+
+    return {
+        shortDate: `${monthName} ${day}${getSuffix(day)}`,
+        month: randomDate.getMonth() + 1,
+        day: day
+    };
 }
 
-displayTodaysDate();
+// Gets todays date
+function getToday() {
+    const date = new Date();
+    
+    return {
+        shortDate: `${date.toLocaleString("default", { month: "long" })} ${date.getDate()}${getSuffix(date.getDate())}`,
+        longDate: `${date.toLocaleString("default", { month: "long" })} ${date.getDate()}${getSuffix(date.getDate())}, ${date.getFullYear()}`,
+        month: date.getMonth() + 1,
+        day: date.getDate()
+    }
+}

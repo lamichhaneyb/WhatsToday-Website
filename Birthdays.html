@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href = "style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap" rel="stylesheet">
   <title>WhatsToday?</title>
 </head>
 <body>
@@ -16,7 +19,7 @@
        <a href="signup.html">SignUp(for Now)</a>
       <a href="Local.html">Local</a>
       <a href="EventMap.html">Event Map</a>
-      <a href="Birthdays.html">Birthdays</a>
+      <a href="Birthdays.html"><span class="current">Birthdays</span></a>
       <a href="RandomDay.html">Random Day</a>
     </div>
   </nav>
@@ -31,58 +34,12 @@
     <main class="content">
       <div class="content-inner">
         <h1 class="page-title">Birthdays Today</h1>
-        <h2 class="birthdayDate"><span class="date-display date-short"></span></h2>
-
-        <div class="birthdayGrid" id="birthdayGrid">
-          <div class="birthdayCard">
-            <div class="birthdayImage">
-              <img src="img link" alt="Picture Here">
-            </div>
-            <div class="birthdayInfo">
-              <span class="birthdayName">Name </span>
-              <span class="birthdayYear">Year</span>
-            </div>
-            <p class="birthdayDesc">Description</p>
-          </div>
-
-          <div class="birthdayCard">
-            <div class="birthdayImage">
-              <img src="img link" alt="Picture Here">
-            </div>
-            <div class="birthdayInfo">
-              <span class="birthdayName">Name </span>
-              <span class="birthdayYear">Year</span>
-            </div>
-            <p class="birthdayDesc">Description</p>
-          </div>
-
-          <div class="birthdayCard">
-            <div class="birthdayImage">
-              <img src="img link" alt="Picture Here">
-            </div>
-            <div class="birthdayInfo">
-              <span class="birthdayName">Name </span>
-              <span class="birthdayYear">Year</span>
-            </div>
-            <p class="birthdayDesc">Description</p>
-          </div>
-
-          <div class="birthdayCard">
-            <div class="birthdayImage">
-              <img src="img link" alt="Picture Here">
-            </div>
-            <div class="birthdayInfo">
-              <span class="birthdayName">Name </span>
-              <span class="birthdayYear">Year</span>
-            </div>
-            <p class="birthdayDesc">Description</p>
-          </div>
-
-        </div>
-
+        <div class="birthdayGrid" id="birthdayGrid"></div>
       </div>
     </main>
   </div>
   <script src="js/date.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/birthdays.js"></script>
 </body>
 </html>
