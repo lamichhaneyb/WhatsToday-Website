@@ -1,80 +1,160 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // TEMP test load
-    loadCountryArticles("USA");
-    const today = getToday();
+document.addEventListener("DOMContentLoaded", async () => {
+  const today = getToday();
 
-    // display date
-    document.querySelectorAll(".date-display").forEach(el => {
-        el.textContent = today.longDate;
-    });
+  document.querySelectorAll(".date-display").forEach(el => {
+    el.textContent = today.longDate;
+  });
+
+  await loadSvgMap();
 });
 
-async function loadCountryArticles(countryName) {
-    const coords = getCountryCoordinates(countryName);
+async function loadSvgMap() {
+  const wrap = document.getElementById("svgMapWrap");
+  const res = await fetch("assets/world.svg");
+  const svgText = await res.text();
 
-    if (!coords) {
-        console.error("Country not found:", countryName);
-        return;
-    }
+  wrap.innerHTML = svgText;
 
-    const data = await getNearbyArticles(
-        coords.lat,
-        coords.lon,
-        10000
-    );
+  const svg = wrap.querySelector("svg");
 
-    console.log("Geo API response:", data);
+  if (svg) {
+    const box = svg.getBBox();
+    svg.setAttribute("viewBox", `${box.x} ${box.y} ${box.width} ${box.height}`);
+    svg.removeAttribute("width");
+    svg.removeAttribute("height");
+  }
 
-    if (!data?.query?.geosearch) {
-        console.error("No articles returned");
-        return;
-    }
+  const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
-    renderMapArticles(countryName, data.query.geosearch);
+  const countries = [...wrap.querySelectorAll("svg g[id]")].filter(country => {
+    const code = country.id.toUpperCase();
+    return code.length === 2;
+  });
+
+  countries.forEach(country => {
+    country.classList.add("country");
+
+    country.addEventListener("click", () => {
+      countries.forEach(c => c.classList.remove("selected-country"));
+      country.classList.add("selected-country");
+
+      const code = country.id.toUpperCase();
+      const countryName = regionNames.of(code);
+
+      loadCountryArticles(countryName);
+    });
+  });
 }
 
-function renderMapArticles(countryName, articles) {
-    const grid = document.getElementById("contentGrid");
+async function loadCountryArticles(countryName) {
+  const selectedCountry = document.getElementById("selectedCountry");
+  const grid = document.getElementById("contentGrid");
 
-    if (!grid) {
-        console.error("contentGrid missing");
-        return;
-    }
+  selectedCountry.textContent = countryName;
+  grid.innerHTML = "<p>Loading articles...</p>";
 
-    grid.innerHTML = "";
+  const today = new Date();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
 
-    const heading = document.createElement("h2");
-    heading.textContent = `Articles near ${countryName}`;
-    grid.appendChild(heading);
+  let articles = await getTodayArticlesForCountry(countryName, month, day);
 
-    articles.forEach(article => {
-        const card = document.createElement("div");
-        card.className = "articleCard";
-        card.style.cursor = "pointer";
+  if (articles.length < 4) {
+    articles = await getGeneralCountryArticles(countryName);
+  }
 
-        card.addEventListener("click", () => {
-            window.open(
-                `https://en.wikipedia.org/wiki/${encodeURIComponent(article.title.replace(/ /g, "_"))}`,
-                "_blank"
-            );
+  renderArticles(countryName, articles);
+}
+
+async function getTodayArticlesForCountry(countryName, month, day) {
+  try {
+    const url =
+      `https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/all/${month}/${day}`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    const allItems = [
+      ...(data.events || []),
+      ...(data.births || []),
+      ...(data.deaths || []),
+      ...(data.holidays || [])
+    ];
+
+    const matchingPages = [];
+
+    allItems.forEach(item => {
+      const text = `${item.text || ""}`.toLowerCase();
+
+      if (!text.includes(countryName.toLowerCase())) return;
+
+      if (item.pages) {
+        item.pages.forEach(page => {
+          matchingPages.push({
+            pageid: page.pageid,
+            title: page.title,
+            extract: item.text,
+            thumbnail: page.thumbnail
+          });
         });
+      }
+    });
 
-        const body = document.createElement("div");
-        body.className = "articleBody";
+    return matchingPages.slice(0, 12);
+  } catch (error) {
+    console.error("Could not load today articles:", error);
+    return [];
+  }
+}
 
-        const title = document.createElement("h2");
-        title.className = "articleTitle";
-        title.textContent = article.title;
+async function getGeneralCountryArticles(countryName) {
+  try {
+    const query = `${countryName} history culture events`;
 
-        const desc = document.createElement("p");
-        desc.className = "articleDesc";
-        desc.textContent =
-            `Distance: ${(article.dist / 1000).toFixed(1)} km`;
+    const url =
+      `https://en.wikipedia.org/w/api.php?origin=*&action=query&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=12&prop=pageimages|extracts&exintro=1&explaintext=1&exsentences=2&piprop=thumbnail&pithumbsize=400&format=json`;
 
-        body.appendChild(title);
-        body.appendChild(desc);
+    const res = await fetch(url);
+    const data = await res.json();
 
-        card.appendChild(body);
-        grid.appendChild(card);
+    return Object.values(data.query?.pages || []);
+  } catch (error) {
+    console.error("Could not load country articles:", error);
+    return [];
+  }
+}
+
+function renderArticles(countryName, articles) {
+  const grid = document.getElementById("contentGrid");
+  grid.innerHTML = "";
+
+  if (!articles.length) {
+    grid.innerHTML = `<p>No articles found for ${countryName}.</p>`;
+    return;
+  }
+
+  articles.forEach(article => {
+    const hasImage = article.thumbnail?.source;
+
+    const card = document.createElement("div");
+    card.className = "mapArticleCard" + (hasImage ? "" : " no-image");
+
+    const image = hasImage
+        ? `<img class="mapArticleImage" src="${article.thumbnail.source}" alt="${article.title}">`
+        : "";
+
+    card.innerHTML = `
+        ${image}
+        <div class="mapArticleBody">
+        <h2 class="mapArticleTitle">${article.title.replace(/_/g, " ")}</h2>
+        <p class="mapArticleDesc">${article.extract || "No description available."}</p>
+        </div>
+    `;
+
+    card.addEventListener("click", () => {
+        window.open(`https://en.wikipedia.org/?curid=${article.pageid}`, "_blank");
+    });
+
+    grid.appendChild(card);
     });
 }
