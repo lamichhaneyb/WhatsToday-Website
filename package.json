@@ -7,7 +7,9 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "mongo:init": "mkdir -p data/db",
-    "mongo:start": "mongod --dbpath ./data/db --port 27017 --nounixsocket",
+    "mongo:start": "nohup mongod --dbpath ./data/db --port 27017 --bind_ip 127.0.0.1 --nounixsocket --logpath ./data/mongod.log --logappend --pidfilepath ./data/mongod.pid >/dev/null 2>&1 &",
+    "mongo:stop": "test -f ./data/mongod.pid && kill $(cat ./data/mongod.pid) || echo 'MongoDB pid file not found (is it running?)'",
+    "mongo:status": "(lsof -nP -iTCP:27017 -sTCP:LISTEN || true) && (test -f ./data/mongod.pid && echo 'pid:' $(cat ./data/mongod.pid) || true)",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
